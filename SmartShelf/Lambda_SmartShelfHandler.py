@@ -4,7 +4,9 @@ import os
 import requests
 
 S3_BUCKET_NAME = os.environ['S3_BUCKET_NAME']
+S3_REGION = os.environ['S3_REGION']
 LINE_TOKEN = os.environ['LINE_TOKEN']
+
 
 dynamodb = boto3.resource('dynamodb')
 SmartShelfState_table = dynamodb.Table('SmartShelfState')
@@ -35,7 +37,7 @@ def lambda_handler(event, context):
             last_stock_count = body["StockCount"]
             is_dirty = True
             
-            s3_URL = body["S3Uri"].replace(f"s3://{S3_BUCKET_NAME}", f"https://{S3_BUCKET_NAME}.s3.us-east-1.amazonaws.com")
+            s3_URL = body["S3Uri"].replace(f"s3://{S3_BUCKET_NAME}", f"https://{S3_BUCKET_NAME}.s3.{S3_REGION}.amazonaws.com")
             send_line(body["ProductType"], body["StockCount"], body["TimeStamp"], s3_URL)
 
             s3.copy_object(Bucket=S3_BUCKET_NAME, CopySource=body["S3Uri"].replace("s3://", ""), Key="latest.jpg")
