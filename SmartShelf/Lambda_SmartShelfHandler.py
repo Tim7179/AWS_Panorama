@@ -49,3 +49,10 @@ def lambda_handler(event, context):
     # Update table            
     if is_dirty:
         SmartShelfState_table.put_item(Item={"Key": "lastStockCount", "Value": last_stock_count})
+
+    return {
+        "statusCode": 200,
+        "data": {
+            "LastStockCount": last_stock_count,
+        }
+    }
