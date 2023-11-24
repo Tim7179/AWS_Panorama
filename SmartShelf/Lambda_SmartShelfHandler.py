@@ -17,7 +17,11 @@ def send_line(product: str, stock: int, time: str, s3_image: str):
     print(product, stock, time, s3_image)
     response = requests.post("https://notify-api.line.me/api/notify", 
             headers={"Authorization": f"Bearer {LINE_TOKEN}"},
-            data={"message": f"{product} {stock} {time} {s3_image}"},
+            data={
+                "message": f"{product} {stock} {time} {s3_image}",
+                "imageThumbnail":s3_image,
+                "imageFullsize": s3_image,
+            },
         )
     return response
 
