@@ -1,0 +1,7 @@
+{
+    "Records": [
+        {
+            "body": "{\"ProductType\": \"bottle\",\"StockCount\": 3,\"TimeStamp\": \"2023-11-24 02:38:15\",\"S3Uri\": \"s3://smartshelf-test/frames/bottle_11_24_2_38_1700793495_0.jpg\"}"
+        }
+    ]
+}
